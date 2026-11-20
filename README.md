@@ -30,10 +30,11 @@ Hosted free on **GitHub Pages** from the `gh-pages` branch, which holds just the
 To publish changes, commit to `main`, then run:
 
 ```bash
-git push origin main && git subtree push --prefix site origin gh-pages
+git push origin main && git push --force origin "$(git subtree split --prefix site main)":gh-pages
 ```
 
-GitHub rebuilds in about a minute.
+GitHub rebuilds in about a minute. (`gh-pages` is generated from `site/`, so force-pushing it is safe;
+GitHub sometimes adds its own commits there when the domain setting changes.)
 
 **Domain:** `www.kiduselias.com` is a CNAME to `kiduel.github.io` (set at Squarespace Domains), and the
 `CNAME` file in `site/` tells GitHub Pages which domain to serve. The bare `kiduselias.com` forwards to `www`.
